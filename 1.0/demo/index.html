@@ -25,6 +25,11 @@
             width: 100%;
             height: 100%;
             position: relative;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px;
         }
 
     </style>
@@ -37,6 +42,7 @@
 
 <div class="a">
     asjdlasjdlfjalsjflasjdlkfjaslfjal;asjdlfjalsjflasjdlkfjaslfjal;fjalsjflasjdlkfjaslfjal;asjdlfjalsjflasjdlkfjaslfjal;asjdlfjalsjflasjdlkfjaslfjal;asjdlfjalsjflasjdlkfjaslfjal;
+    <p><button class="J_Button">Click Me</button></p>
 </div>
 
 
@@ -56,9 +62,19 @@
         ]
     });
 
-    S.use('gallery/panel/1.0/index', function (S, Panel) {
+    S.use('node, event, gallery/panel/1.0/index', function (S, Node, Event, Panel) {
           var panel = new Panel("#panel");
+          var status = 0;
           window.panel = panel;
+          Node.all(".J_Button").on('click', function(){
+            if(status++ % 2) {
+                panel.hide()
+            }
+            else {
+                panel.show();
+            }
+            // (status++) % 2 ?  : 
+          })
     })
 </script>
 </body>

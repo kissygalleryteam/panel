@@ -84,10 +84,17 @@ KISSY.add(function(S, Node, UA){
             
         },
         show: function() {
-            this.parentNode.addClass(MODULE_ACTIVE_CLASS);
-            this.el.fire("show");
+            var self = this;
+            self.showProtect = true;
+            self.showProtectTimer != null && clearTimeout(self.showProtectTimer);
+            self.showProtectTimer = setTimeout(function(){
+                self.showProtect = false;
+            }, 8);
+            self.parentNode.addClass(MODULE_ACTIVE_CLASS);
+            self.el.fire("show");
         },
         hide: function() {
+            if(this.showProtect) return;
             this.parentNode.removeClass(MODULE_ACTIVE_CLASS);
             this.el.fire("close");
         },
